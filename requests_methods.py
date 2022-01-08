@@ -100,9 +100,6 @@ print("Start #4")
 request_types = ["POST", "GET", "PUT", "DELETE"]
 success = '{"success":"!"}'
 wrongMethod = "Wrong method provided"
-#response = ""
-#method = ""
-#type = ""
 
 def findRightResponse(response, method, type):
     print(f"...Run the '{method} request method with '{type}' param/data")
