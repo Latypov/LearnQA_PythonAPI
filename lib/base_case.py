@@ -1,6 +1,5 @@
 import json
 from datetime import datetime
-
 from requests import Response
 
 class BaseCase:
