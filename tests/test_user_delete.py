@@ -1,9 +1,11 @@
+import allure
 import requests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 from lib.my_requests import MyRequests
 
 
+@allure.epic("DELETE method cases")
 class TestUserDelete(BaseCase):
     def setup(self):
         data = {
@@ -17,6 +19,7 @@ class TestUserDelete(BaseCase):
         self.user_id = self.get_json_value(response1, "user_id")
 
 
+    @allure.description("This test delete user")
     def test_delete_user(self):
         #Try to DELETE existing user
         response1 = MyRequests.delete(

@@ -1,11 +1,13 @@
+import allure
 import pytest
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 from lib.my_requests import MyRequests
 
-
+@allure.epic("PUT method cases")
 class TestUserEdit(BaseCase):
 
+    @allure.description("This test update user name")
     def test_edit_just_created_user(self):
         #REGISTER
         register_data = self.prepare_registration_data()
@@ -60,6 +62,7 @@ class TestUserEdit(BaseCase):
         ('l')
     ]
 
+    @allure.description("This test try to update user data")
     @pytest.mark.parametrize('condition', invalid_params)
     def test_edit_user_data_negative(self, condition):
         #REGISTER

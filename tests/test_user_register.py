@@ -1,8 +1,10 @@
+import allure
 import pytest
 from lib.my_requests import MyRequests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 
+@allure.epic("User registration cases")
 class TestUserRegister(BaseCase):
 
     excluded_params = [
@@ -17,6 +19,7 @@ class TestUserRegister(BaseCase):
         ("251_symbols_name")
     ]
 
+    @allure.description("This test create user with missed params")
     @pytest.mark.parametrize('condition', excluded_params)
     def test_create_user_with_missed_param(self, condition):
 
@@ -97,7 +100,7 @@ class TestUserRegister(BaseCase):
             assert response.content.decode("utf-8") == f"The value of 'username' field is too long",\
                 f"Unexpected response content '{response.content}'"
 
-
+    @allure.description("This test create user successfully")
     def test_create_user_successfully(self):
         data = self.prepare_registration_data()
         response = MyRequests.post(f"/user/", data=data)
@@ -106,6 +109,7 @@ class TestUserRegister(BaseCase):
         Assertions.assert_json_has_key(response, "id")
 
 
+    @allure.description("This test create user with existing email")
     def test_create_user_with_existing_email(self):
         email = 'vinkotov@example.com'
         data = self.prepare_registration_data(email)

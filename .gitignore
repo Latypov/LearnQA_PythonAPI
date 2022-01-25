@@ -2,4 +2,4 @@
 .pytest.cache
 __pycache__/
 logs/*
-tests_results/
+tests_results/*

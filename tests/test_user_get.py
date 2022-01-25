@@ -1,9 +1,13 @@
+import allure
+
 from lib.my_requests import MyRequests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 
+@allure.epic("GET method cases")
 class TestUserGet(BaseCase):
 
+    @allure.description("This test as non authorized user try get user data")
     def test_get_user_details_not_auth(self):
 
         response = MyRequests.get("/user/2")
@@ -25,6 +29,7 @@ class TestUserGet(BaseCase):
         self.token = self.get_header(response1, "x-csrf-token")
         self.user_id_from_auth_method = self.get_json_value(response1, "user_id")
 
+    @allure.description("This test as an authorized user gets user data")
     def test_get_user_details_auth_as_same_user(self):
 
         response2 = MyRequests.get(
@@ -37,6 +42,7 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_keys(response2, expected_fields)
 
 
+    @allure.description("This test as an authorized user try to get another user's data")
     def test_get_user_details_auth_as_other_user(self):
 
         response2 = MyRequests.get(
